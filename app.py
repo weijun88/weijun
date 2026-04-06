@@ -21,28 +21,28 @@ def main():
 def dbs():
     return(render_template('dbs.html'))
 
-@app.route("/dbsPrediction", methods=["GET","POST"])
+@app.route("/dbsPrediction",methods=["GET","POST"])
 def dbsPrediction():
     q = float(request.form.get("q"))
     r = model.predict([[q]])
     r = r[0][0]
     return(render_template('dbsPrediction.html',r=r))
 
-@app.route("/chatbot,methods=["GET","POST"])
+@app.route("/chatbot",methods=["GET","POST"])
 def chatbot():
     return(render_template('chatbot.html'))
 
-@app.route("/reply",methods=["GET,POST"])
+@app.route("/reply",methods=["GET","POST"])
 def reply():
     q = request.form.get("q")
     r = client.chat.completions.create(
-    model="openai/gpt-oss-120b",
-    messages=[{
-        "role": "user",
-        "content": q
-    }]
+        model="openai/gpt-oss-120b",
+        messages=[{
+            "role": "user",
+            "content": q
+        }]                     
     )
-    return(render_template('reply.hyml',r=rr.choices[0].message.content))
+    return(render_template('reply.html',r=r.choices[0].message.content))
 
 if __name__ == "__main__":
     app.run()
