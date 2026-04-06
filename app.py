@@ -42,7 +42,7 @@ def reply():
         "content": q
     }]
 )
-    return(render_template('reply.hyml',r=rr.choices[0].message.content))
+return(render_template('reply.hyml',r=rr.choices[0].message.content))
 
 if __name__ == "__main__":
     app.run()
